@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const baseUrl = process.env.REACT_APP_API_URL;
+
 const EmailComposer = () => {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
@@ -13,7 +15,7 @@ const EmailComposer = () => {
     const generateResponse = async () => {
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:4000/generate-email", { prompt });
+            const res = await axios.post(baseUrl + "/generate-email", { prompt });
             setResponse(res.data.data); // Assume backend returns { response: "Generated text" }
         } catch (error) {
             console.error("Error generating response:", error);
@@ -30,7 +32,7 @@ const EmailComposer = () => {
         }
         setSending(true);
         try {
-            await axios.post("http://localhost:4000/send-email", {
+            await axios.post(baseUrl + "/send-email", {
                 to: email,
                 subject: subject,
                 text: response,
