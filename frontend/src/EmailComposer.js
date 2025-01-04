@@ -38,6 +38,10 @@ const EmailComposer = () => {
                 text: response,
             });
             alert("Email sent successfully!");
+            setEmail("");
+            setSubject("");
+            setPrompt("");
+            setResponse("");
         } catch (error) {
             console.error("Error sending email:", error);
             alert("Failed to send email.");
